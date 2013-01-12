@@ -3,6 +3,7 @@
  */
 package tuenti.api.model;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -14,7 +15,7 @@ public class Album {
 	private String id;
 	private String name;
 	private int size;
-	private int last_chage_time;
+	private Date last_change_time;
 	private Map<Integer,String> thumbnail;
 	
 	public Album() {
@@ -42,11 +43,11 @@ public class Album {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	public int getLast_chage_time() {
-		return last_chage_time;
+	public Date getLast_change_time() {
+		return last_change_time;
 	}
-	public void setLast_chage_time(int last_chage_time) {
-		this.last_chage_time = last_chage_time;
+	public void setLast_change_time(Date last_change_time) {
+		this.last_change_time = last_change_time;
 	}
 	public Map<Integer, String> getThumbnail() {
 		return thumbnail;
@@ -58,7 +59,7 @@ public class Album {
 	@Override
 	public String toString() {
 		return "Album [id=" + id + ", name=" + name + ", size=" + size
-				+ ", last_chage_time=" + last_chage_time + ", thumbnail="
+				+ ", last_change_time=" + last_change_time + ", thumbnail="
 				+ thumbnail + "]";
 	}
 }

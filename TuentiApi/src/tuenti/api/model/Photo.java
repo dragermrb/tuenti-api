@@ -19,7 +19,7 @@ public class Photo {
 	private boolean can_tag;
 	private boolean can_see_profile;
 	private boolean can_see_wall;
-	private boolean can_dowload;
+	private boolean can_download;
 	
 	public Photo() {
 		
@@ -79,11 +79,11 @@ public class Photo {
 	public void setCan_see_wall(boolean can_see_wall) {
 		this.can_see_wall = can_see_wall;
 	}
-	public boolean isCan_dowload() {
-		return can_dowload;
+	public boolean isCan_download() {
+		return can_download;
 	}
-	public void setCan_dowload(boolean can_dowload) {
-		this.can_dowload = can_dowload;
+	public void setCan_download(boolean can_download) {
+		this.can_download = can_download;
 	}
 
 	@Override
@@ -93,6 +93,6 @@ public class Photo {
 				+ ", photo_url_600=" + photo_url_600 + ", can_edit_title="
 				+ can_edit_title + ", can_tag=" + can_tag
 				+ ", can_see_profile=" + can_see_profile + ", can_see_wall="
-				+ can_see_wall + ", can_dowload=" + can_dowload + "]";
+				+ can_see_wall + ", can_dowload=" + can_download + "]";
 	}
 }

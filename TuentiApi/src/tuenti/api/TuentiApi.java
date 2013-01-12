@@ -10,6 +10,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -191,8 +192,9 @@ public class TuentiApi {
 	        Album album=new Album();
 	        album.setId((String)userAlbum.getKey());
 			album.setName((String)album_fields.get("name"));
-			album.setSize(Integer.parseInt((String)album_fields.get("size")));
-			album.setLast_chage_time(Integer.parseInt((String)album_fields.get("last_chage_time")));
+			album.setSize(((Number)album_fields.get("size")).intValue());
+			album.setLast_change_time(new Date(((Number) album_fields
+					.get("last_change_time")).longValue() * 1000));
 
 			Map<Integer,String> thumbnail=new HashMap<Integer,String>();
 			thumbnail.put(30,(String)thumbnail_fields.get("30"));
@@ -237,11 +239,11 @@ public class TuentiApi {
           photo.setPhoto_url_100((String)p.get("photo_url_100"));
           photo.setPhoto_url_200((String)p.get("photo_url_200"));
           photo.setPhoto_url_600((String)p.get("photo_url_600"));
-          photo.setCan_edit_title(Boolean.parseBoolean((String) p.get("can_edit_title")));
-          photo.setCan_tag(Boolean.parseBoolean((String) p.get("can_tag")));
-          photo.setCan_see_profile(Boolean.parseBoolean((String) p.get("can_see_profile")));
-          photo.setCan_see_wall(Boolean.parseBoolean((String) p.get("can_see_wall")));
-          photo.setCan_dowload(Boolean.parseBoolean((String) p.get("can_dowload")));
+          photo.setCan_edit_title((Boolean) p.get("can_edit_title"));
+          photo.setCan_tag((Boolean) p.get("can_tag"));
+          photo.setCan_see_profile((Boolean) p.get("can_see_profile"));
+          photo.setCan_see_wall((Boolean) p.get("can_see_wall"));
+          photo.setCan_download((Boolean) p.get("can_download"));
           
           list.add(photo);
         }
