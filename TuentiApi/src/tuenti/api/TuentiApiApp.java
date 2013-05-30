@@ -84,8 +84,8 @@ public class TuentiApiApp {
 		        
 		        System.out.println("- AlbumID: "+userAlbum.getId());
 		        
-		        System.out.println("### Getting album photos...");
-		        List<Photo> albumPhotos=tuenti.getAlbumPhotos(userAlbum.getId());
+		        System.out.println("### Getting album photos (first page)...");
+		        List<Photo> albumPhotos=tuenti.getAlbumPhotos(userAlbum.getId(), 1);
 		        
 		        //Foreach photo...
 		        ListIterator<Photo> it_aps = albumPhotos.listIterator();

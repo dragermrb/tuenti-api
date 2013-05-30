@@ -209,19 +209,20 @@ public class TuentiApi {
 	}
 	
 	/**
-	 * Get photos from album
+	 * Get photos from album (limited to 24 per page)
 	 * 
 	 * @param album_id Id of desired album
+	 * @param page Start page
 	 * @return List of photos
 	 * @throws Exception
 	 */
-	public List<Photo> getAlbumPhotos(String album_id) throws Exception{
+	public List<Photo> getAlbumPhotos(String album_id, int page) throws Exception {
 		if (this.session_id==null){
 			throw new Exception("Not logged in");
 		}
 		
 		String method="getAlbumPhotos";
-		String data="{\"album_id\": \""+album_id+"\"}";
+		String data="{\"album_id\": \""+album_id+"\", \"page\": \""+page+"\"}";
 		
 		JSONArray a=request(method,data);
 		JSONObject o=(JSONObject)a.get(0);
@@ -251,6 +252,42 @@ public class TuentiApi {
         return list;
 	}
 
+	public List<Photo> getPhotosData(String ids, String fields) throws Exception {
+		if (this.session_id==null){
+			throw new Exception("Not logged in");
+		}
+		
+		String method="getPhotosData";
+		String data="{\"ids\": \""+ids+"\", \"fields\": \""+fields+"\"}";
+		
+		JSONArray a=request(method,data);
+		JSONObject o=(JSONObject)a.get(0);
+		JSONArray photos_list=(JSONArray)o.get("photos");
+		
+		ArrayList<Photo> list=new ArrayList<Photo>();
+		
+		ListIterator it = photos_list.listIterator();
+        while (it.hasNext()) {
+          JSONObject p = (JSONObject)it.next();
+          
+          Photo photo=new Photo();
+          photo.setId((String)p.get("id"));
+          photo.setTitle((String)p.get("title"));
+          photo.setPhoto_url_100((String)p.get("photo_url_100"));
+          photo.setPhoto_url_200((String)p.get("photo_url_200"));
+          photo.setPhoto_url_600((String)p.get("photo_url_600"));
+          photo.setCan_edit_title((Boolean) p.get("can_edit_title"));
+          photo.setCan_tag((Boolean) p.get("can_tag"));
+          photo.setCan_see_profile((Boolean) p.get("can_see_profile"));
+          photo.setCan_see_wall((Boolean) p.get("can_see_wall"));
+          photo.setCan_download((Boolean) p.get("can_download"));
+          
+          list.add(photo);
+        }
+		
+		
+		return list;
+	}
 	
 	/**
 	 * Calculates the MD5 hash of a string
@@ -258,7 +295,7 @@ public class TuentiApi {
 	 * @return MD5 hash of string
 	 * @throws Exception
 	 */
- 	private String md5(String stringToHash) throws Exception {
+  	private String md5(String stringToHash) throws Exception {
 		char[] HEXADECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
 				'9', 'a', 'b', 'c', 'd', 'e', 'f' };
 		StringBuilder sb = null;
